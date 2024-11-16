@@ -99,7 +99,7 @@ def update_output_container(selected_statistics, data):
             figure=px.bar(average_sales,
             x="Vehicle_Type",
             y="Automobile_Sales",
-            title="Avergae automobile sales per vehicle type during recession periods"))
+            title="Average automobile sales per vehicle type during recession periods"))
         
 # Plot 3 Pie chart for total expenditure share by vehicle type during recessions
         # grouping data for plotting
@@ -107,9 +107,9 @@ def update_output_container(selected_statistics, data):
         exp_rec= recession_data.groupby("Vehicle_Type", as_index=False)["Advertising_Expenditure"].sum()
         R_chart3 = dcc.Graph(
             figure=px.pie(exp_rec,
-            x="Vehicle_Type",
-            y="Advertising_Expenditure",
-            title="Totel adverzising expenditure per vehicle type")
+            names="Vehicle_Type",
+            values="Advertising_Expenditure",
+            title="Total advertising expenditure per vehicle type")
         )
 
 # Plot 4 bar chart for the effect of unemployment rate on vehicle type and sales
@@ -149,7 +149,7 @@ def update_output_container(selected_statistics, data):
 # Plot 2 Total Monthly Automobile sales using line chart.
         # grouping data for plotting.
 	# Hint:Use the columns Month and Automobile_Sales.
-        mas=recession_data.groupby("Month", as_index=False)["Automobile_Sales"].mean()
+        mas=yearly_data.groupby("Month", as_index=False)["Automobile_Sales"].mean()
         Y_chart2 = dcc.Graph(figure=px.line(mas,
         x='Month',
         y='Automobile_Sales',
@@ -184,4 +184,3 @@ def update_output_container(selected_statistics, data):
 # Run the Dash app
 if __name__ == '__main__':
     app.run_server(debug=True)
-
